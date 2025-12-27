@@ -42,37 +42,37 @@ export default function DashboardPage() {
       <MainLayout>
         <div className="max-w-4xl mx-auto px-4 py-8">
           <div className="mb-8">
-            <h1 className="text-2xl sm:text-4xl font-bold text-gray-900 mb-2">Welcome, {user?.email}!</h1>
-            <p className="text-sm sm:text-base text-gray-600">Manage your room bookings</p>
+            <h1 className="text-2xl sm:text-4xl font-bold text-white mb-2">Welcome, {user?.email}!</h1>
+            <p className="text-sm sm:text-base text-slate-300">Manage your room bookings</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-            <div className="bg-white rounded-lg shadow p-6">
-              <p className="text-gray-600 text-sm">Total Bookings</p>
-              <p className="text-3xl font-bold text-gray-900">{bookings.length}</p>
+            <div className="bg-white/10 backdrop-blur-md border border-white/10 rounded-lg shadow p-6">
+              <p className="text-slate-300 text-sm">Total Bookings</p>
+              <p className="text-3xl font-bold text-white">{bookings.length}</p>
             </div>
-            <div className="bg-white rounded-lg shadow p-6">
-              <p className="text-gray-600 text-sm">Pending</p>
-              <p className="text-3xl font-bold text-yellow-600">{pendingBookings.length}</p>
+            <div className="bg-white/10 backdrop-blur-md border border-white/10 rounded-lg shadow p-6">
+              <p className="text-slate-300 text-sm">Pending</p>
+              <p className="text-3xl font-bold text-yellow-400">{pendingBookings.length}</p>
             </div>
-            <div className="bg-white rounded-lg shadow p-6">
-              <p className="text-gray-600 text-sm">Approved</p>
-              <p className="text-3xl font-bold text-green-600">{approvedBookings.length}</p>
+            <div className="bg-white/10 backdrop-blur-md border border-white/10 rounded-lg shadow p-6">
+              <p className="text-slate-300 text-sm">Approved</p>
+              <p className="text-3xl font-bold text-green-400">{approvedBookings.length}</p>
             </div>
           </div>
 
           <div className="mb-8">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-2xl font-bold text-gray-900">Recent Bookings</h2>
+              <h2 className="text-2xl font-bold text-white">Recent Bookings</h2>
               <Link href="/rooms">
-                <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">New Booking</button>
+                <button className="bg-hima-secondary text-white px-4 py-2 rounded-lg hover:bg-hima-secondary/80">New Booking</button>
               </Link>
             </div>
 
             {loading ? (
-              <p className="text-gray-600">Loading...</p>
+              <p className="text-slate-400">Loading...</p>
             ) : bookings.length === 0 ? (
-              <p className="text-gray-600">No bookings yet. Start by booking a room!</p>
+              <p className="text-slate-400">No bookings yet. Start by booking a room!</p>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {bookings.slice(0, 6).map((booking) => (

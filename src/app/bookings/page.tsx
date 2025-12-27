@@ -48,7 +48,7 @@ export default function BookingsPage() {
     <ProtectedRoute>
       <MainLayout>
         <div className="max-w-4xl mx-auto px-4 py-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-8">My Bookings</h1>
+          <h1 className="text-4xl font-bold text-white mb-8">My Bookings</h1>
 
           <div className="mb-6">
             <div className="flex gap-2 flex-wrap">
@@ -56,7 +56,7 @@ export default function BookingsPage() {
                 <button
                   key={status}
                   onClick={() => setFilterStatus(status)}
-                  className={`px-4 py-2 rounded-lg font-medium transition-colors ${filterStatus === status ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-800 hover:bg-gray-300"}`}
+                  className={`px-4 py-2 rounded-lg font-medium transition-colors ${filterStatus === status ? "bg-hima-secondary text-white" : "bg-white/10 text-slate-300 hover:bg-white/20 border border-white/10"}`}
                 >
                   {status.charAt(0).toUpperCase() + status.slice(1)}
                 </button>

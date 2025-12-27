@@ -1,7 +1,7 @@
 import { supabase } from "@/lib/supabase";
 import { User } from "@/types";
 
-const MOCK_USER: User = {
+const MOCK_ADMIN: User = {
   id: "mock-admin-id",
   email: "admin@demo.com",
   full_name: "Demo Admin",
@@ -9,7 +9,16 @@ const MOCK_USER: User = {
   created_at: new Date().toISOString(),
 };
 
+const MOCK_USER: User = {
+  id: "mock-user-id",
+  email: "user@demo.com",
+  full_name: "Demo User",
+  role: "user",
+  created_at: new Date().toISOString(),
+};
+
 const MOCK_SESSION_KEY = "room_booking_mock_session";
+const MOCK_USER_ROLE_KEY = "room_booking_mock_role";
 
 export const authService = {
   async register(email: string, password: string, fullName: string) {
@@ -19,6 +28,7 @@ export const authService = {
       // Simulate login immediately
       if (typeof window !== "undefined") {
         localStorage.setItem(MOCK_SESSION_KEY, "true");
+        localStorage.setItem(MOCK_USER_ROLE_KEY, "user");
       }
       return { success: true, user: { ...MOCK_USER, email, full_name: fullName } };
     }
@@ -54,8 +64,16 @@ export const authService = {
       console.log("Mock Login:", email);
       if (typeof window !== "undefined") {
         localStorage.setItem(MOCK_SESSION_KEY, "true");
+        // Simple logic: if email contains "admin", log them in as admin
+        const isAdmin = email.toLowerCase().includes("admin");
+        localStorage.setItem(MOCK_USER_ROLE_KEY, isAdmin ? "admin" : "user");
+
+        return {
+          success: true,
+          user: isAdmin ? MOCK_ADMIN : { ...MOCK_USER, email }
+        };
       }
-      return { success: true, user: { ...MOCK_USER, email } };
+      return { success: true, user: MOCK_USER };
     }
 
     try {
@@ -76,6 +94,7 @@ export const authService = {
       // Mock Mode
       if (typeof window !== "undefined") {
         localStorage.removeItem(MOCK_SESSION_KEY);
+        localStorage.removeItem(MOCK_USER_ROLE_KEY);
       }
       return { success: true };
     }
@@ -93,7 +112,8 @@ export const authService = {
     if (!supabase) {
       // Mock Mode
       if (typeof window !== "undefined" && localStorage.getItem(MOCK_SESSION_KEY)) {
-        return MOCK_USER;
+        const role = localStorage.getItem(MOCK_USER_ROLE_KEY);
+        return role === "admin" ? MOCK_ADMIN : MOCK_USER;
       }
       return null;
     }
@@ -110,10 +130,8 @@ export const authService = {
   async getUserProfile(userId: string): Promise<User | null> {
     if (!supabase) {
       // Mock Mode
-      if (userId === MOCK_USER.id) {
-        return MOCK_USER;
-      }
-      return MOCK_USER; // Fallback for demo
+      if (userId === MOCK_ADMIN.id) return MOCK_ADMIN;
+      return MOCK_USER;
     }
 
     try {

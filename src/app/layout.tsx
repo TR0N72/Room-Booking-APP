@@ -1,6 +1,12 @@
-import type { Metadata } from "next";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  variable: "--font-montserrat",
+  weight: ["400", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
   title: "Room Booking System",
@@ -32,9 +38,9 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
+        <link href="https://fonts.cdnfonts.com/css/metropolis-2" rel="stylesheet" />
       </head>
-      <body className="bg-gray-50">
-
+      <body className={`${montserrat.variable} bg-hima-main text-slate-100 font-sans antialiased`}>
         {children}
         <Toaster position="top-right" />
       </body>
