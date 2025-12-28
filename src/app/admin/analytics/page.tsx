@@ -1,5 +1,7 @@
 "use client";
 
+import { BarChart3, CalendarCheck, Activity, Clock } from "lucide-react";
+
 import { useEffect, useState } from "react";
 import { MainLayout } from "@/components/common/MainLayout";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
@@ -61,20 +63,32 @@ export default function AnalyticsPage() {
         <ProtectedRoute>
             <MainLayout>
                 <div className="max-w-7xl mx-auto px-4 py-8">
-                    <h1 className="text-3xl font-bold text-white mb-8">📊 Analytics Dashboard</h1>
+                    <div className="flex items-center mb-8">
+                        <BarChart3 className="w-8 h-8 text-white mr-3" />
+                        <h1 className="text-3xl text-white">Analytics Dashboard</h1>
+                    </div>
 
                     {/* Key Metrics Cards */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                         <div className="bg-white/5 backdrop-blur-md p-6 rounded-xl border border-white/10 border-l-4 border-l-blue-500">
+                            <div>
+                                <CalendarCheck className="w-5 h-5 text-blue-400 mb-2" />
+                            </div>
                             <p className="text-slate-400 text-sm font-medium">Total Bookings</p>
                             <p className="text-3xl font-bold text-white">{stats?.totalBookings}</p>
                         </div>
 
                         <div className="bg-white/5 backdrop-blur-md p-6 rounded-xl border border-white/10 border-l-4 border-l-purple-500">
+                            <div>
+                                <Activity className="w-5 h-5 text-purple-400 mb-2" />
+                            </div>
                             <p className="text-slate-400 text-sm font-medium">Utilization Rate</p>
                             <p className="text-3xl font-bold text-white">{stats?.utilizationRate}%</p>
                         </div>
                         <div className="bg-white/5 backdrop-blur-md p-6 rounded-xl border border-white/10 border-l-4 border-l-orange-500">
+                            <div>
+                                <Clock className="w-5 h-5 text-orange-400 mb-2" />
+                            </div>
                             <p className="text-slate-400 text-sm font-medium">Avg Duration</p>
                             <p className="text-3xl font-bold text-white">{stats?.averageBookingDuration} hrs</p>
                         </div>

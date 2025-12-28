@@ -41,7 +41,7 @@ export default function ProfilePage() {
     <ProtectedRoute>
       <MainLayout>
         <div className="max-w-2xl mx-auto px-4 py-8">
-          <h1 className="text-4xl font-bold text-white mb-8">Profile</h1>
+          <h1 className="text-4xl text-white mb-8">Profile</h1>
 
           <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-xl p-8">
             <div className="mb-6">
@@ -70,7 +70,7 @@ export default function ProfilePage() {
           </div>
 
           <div className="mt-8 bg-black/20 backdrop-blur-sm rounded-2xl p-6 border border-white/5">
-            <h3 className="font-semibold text-white mb-2">About This App</h3>
+            <h3 className="text-white mb-2">About This App</h3>
             <p className="text-slate-300 mb-2">
               <strong>Room Booking System</strong> is a modern PWA application that allows users to easily book meeting rooms and conference halls.
             </p>

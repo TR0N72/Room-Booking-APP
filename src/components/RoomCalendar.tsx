@@ -49,7 +49,7 @@ export function RoomCalendar({ bookings }: RoomCalendarProps) {
     return (
         <div className="flex flex-col md:flex-row gap-8">
             <div className="flex-1">
-                <h3 className="text-xl font-heading font-semibold mb-4 text-white">Room Availability</h3>
+                <h3 className="text-xl font-heading mb-4 text-white">Room Availability</h3>
                 <div className="calendar-container p-6 bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 shadow-xl">
                     <Calendar
                         onChange={(val) => setDate(val as Date)}
@@ -72,7 +72,7 @@ export function RoomCalendar({ bookings }: RoomCalendarProps) {
             </div>
 
             <div className="flex-1">
-                <h3 className="text-xl font-heading font-semibold mb-4 text-white">
+                <h3 className="text-xl font-heading mb-4 text-white">
                     Schedule for <span className="text-hima-link">{format(date, "MMMM d, yyyy")}</span>
                 </h3>
 

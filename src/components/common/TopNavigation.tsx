@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { authService } from "@/services/auth";
 import { toast } from "sonner";
-import { Hexagon } from "lucide-react";
+import { Hexagon, LayoutDashboard, DoorOpen, CalendarDays, Settings, User } from "lucide-react";
 
 export function TopNavigation() {
     const pathname = usePathname();
@@ -77,21 +77,26 @@ export function TopNavigation() {
                     {/* Navigation Links */}
                     <div className="flex items-center gap-1 md:gap-2 overflow-x-auto no-scrollbar mask-gradient px-2 md:px-0">
                         <Link href="/dashboard" className={`${linkBaseClasses} ${pathname === "/dashboard" ? activeLinkClasses : inactiveLinkClasses}`}>
-                            Dashboard
+                            <span className="md:hidden"><LayoutDashboard size={20} /></span>
+                            <span className="hidden md:inline">Dashboard</span>
                         </Link>
                         <Link href="/rooms" className={`${linkBaseClasses} ${pathname.startsWith("/rooms") ? activeLinkClasses : inactiveLinkClasses}`}>
-                            Rooms
+                            <span className="md:hidden"><DoorOpen size={20} /></span>
+                            <span className="hidden md:inline">Rooms</span>
                         </Link>
                         <Link href="/bookings" className={`${linkBaseClasses} ${pathname.startsWith("/bookings") ? activeLinkClasses : inactiveLinkClasses}`}>
-                            Bookings
+                            <span className="md:hidden"><CalendarDays size={20} /></span>
+                            <span className="hidden md:inline">Bookings</span>
                         </Link>
                         {isAdmin && (
                             <Link href="/admin" className={`${linkBaseClasses} ${pathname.startsWith("/admin") ? activeLinkClasses : inactiveLinkClasses}`}>
-                                Admin
+                                <span className="md:hidden"><Settings size={20} /></span>
+                                <span className="hidden md:inline">Admin</span>
                             </Link>
                         )}
                         <Link href="/profile" className={`${linkBaseClasses} ${pathname === "/profile" ? activeLinkClasses : inactiveLinkClasses}`}>
-                            Profile
+                            <span className="md:hidden"><User size={20} /></span>
+                            <span className="hidden md:inline">Profile</span>
                         </Link>
                     </div>
 

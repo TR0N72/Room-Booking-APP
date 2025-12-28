@@ -40,7 +40,7 @@ export default function Home() {
 
           {/* Left Column: Text Content */}
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left order-2 lg:order-1">
-            <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-br from-white via-blue-100 to-blue-300 bg-clip-text text-transparent mb-6 tracking-tight leading-tight">
+            <h1 className="text-5xl md:text-7xl bg-gradient-to-br from-white via-blue-100 to-blue-300 bg-clip-text text-transparent mb-6 tracking-tight leading-tight">
               Room Booking <br className="hidden lg:block" /> System
             </h1>
             <p className="text-xl text-slate-300 mb-10 max-w-2xl lg:max-w-xl leading-relaxed">
@@ -77,7 +77,7 @@ export default function Home() {
               <div className="absolute inset-0 bg-hima-secondary/20 blur-[80px] rounded-full group-hover:bg-hima-secondary/30 transition-all duration-500 animate-pulse" />
               <div className="relative w-48 h-48 lg:w-64 lg:h-64 bg-white/5 rounded-3xl p-6 shadow-2xl ring-1 ring-white/10 backdrop-blur-xl flex items-center justify-center transform group-hover:scale-105 group-hover:rotate-3 transition-all duration-500 animate-float border border-white/5">
                 <img
-                  src="/hima-logo.png"
+                  src="/hima-logo-new.png"
                   alt="HIMA RBC Logo"
                   className="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(145,216,247,0.3)]"
                 />

@@ -116,7 +116,7 @@ export default function AdminRoomsPage() {
       <MainLayout>
         <div className="max-w-4xl mx-auto px-4 py-8">
           <div className="flex justify-between items-center mb-8">
-            <h1 className="text-4xl font-bold text-white">Manage Rooms</h1>
+            <h1 className="text-4xl text-white">Manage Rooms</h1>
             <button
               onClick={() => {
                 setShowForm(!showForm);
@@ -137,7 +137,7 @@ export default function AdminRoomsPage() {
 
           {showForm && (
             <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 mb-8 text-white">
-              <h2 className="text-2xl font-bold text-white mb-6">{editingRoom ? "Edit Room" : "Create New Room"}</h2>
+              <h2 className="text-2xl text-white mb-6">{editingRoom ? "Edit Room" : "Create New Room"}</h2>
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
@@ -233,7 +233,7 @@ export default function AdminRoomsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {rooms.map((room) => (
               <div key={room.id} className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors">
-                <h3 className="text-lg font-bold text-white mb-2">{room.name}</h3>
+                <h3 className="text-lg text-white mb-2">{room.name}</h3>
                 <p className="text-slate-300 text-sm mb-3 line-clamp-2">{room.description}</p>
 
                 <div className="grid grid-cols-2 gap-2 text-sm mb-4">

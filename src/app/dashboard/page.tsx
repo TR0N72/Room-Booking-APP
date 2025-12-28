@@ -42,7 +42,7 @@ export default function DashboardPage() {
       <MainLayout>
         <div className="max-w-4xl mx-auto px-4 py-8">
           <div className="mb-8">
-            <h1 className="text-2xl sm:text-4xl font-bold text-white mb-2">Welcome, {user?.email}!</h1>
+            <h1 className="text-2xl sm:text-4xl text-white mb-2">Welcome, {user?.email}!</h1>
             <p className="text-sm sm:text-base text-slate-300">Manage your room bookings</p>
           </div>
 
@@ -63,7 +63,7 @@ export default function DashboardPage() {
 
           <div className="mb-8">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-2xl font-bold text-white">Recent Bookings</h2>
+              <h2 className="text-2xl text-white">Recent Bookings</h2>
               <Link href="/rooms">
                 <button className="bg-hima-secondary text-white px-4 py-2 rounded-lg hover:bg-hima-secondary/80">New Booking</button>
               </Link>

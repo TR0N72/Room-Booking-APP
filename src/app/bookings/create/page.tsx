@@ -156,7 +156,7 @@ function CreateBookingPageContent() {
   return (
     <MainLayout>
       <div className="max-w-3xl mx-auto px-4 py-8 pb-24">
-        <h1 className="text-3xl md:text-4xl font-heading font-bold text-white mb-8 tracking-tight">Booking Request</h1>
+        <h1 className="text-3xl md:text-4xl font-heading text-white mb-8 tracking-tight">Booking Request</h1>
 
         <div className="bg-white/5 backdrop-blur-xl rounded-3xl p-8 mb-8 border border-white/10 shadow-2xl">
           <div className="mb-6 pb-6 border-b border-white/10">

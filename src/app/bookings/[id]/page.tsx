@@ -1,5 +1,7 @@
 "use client";
 
+import { CalendarDays, Clock, MapPin, Users } from "lucide-react";
+
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { bookingService } from "@/services/bookings";
@@ -85,25 +87,25 @@ export default function BookingDetailPage() {
               <div className="bg-white/5 border border-white/5 rounded-2xl p-6 hover:bg-white/10 transition-colors">
                 <p className="text-slate-400 text-xs font-bold uppercase tracking-widest mb-2">Date</p>
                 <p className="text-xl font-bold text-white flex items-center gap-3">
-                  <span className="text-2xl">📅</span> {formatDate(booking.start_date)}
+                  <CalendarDays className="w-6 h-6 text-slate-400" /> {formatDate(booking.start_date)}
                 </p>
               </div>
               <div className="bg-white/5 border border-white/5 rounded-2xl p-6 hover:bg-white/10 transition-colors">
                 <p className="text-slate-400 text-xs font-bold uppercase tracking-widest mb-2">Time</p>
                 <p className="text-xl font-bold text-white flex items-center gap-3">
-                  <span className="text-2xl">⏰</span> {formatTime(booking.start_time)} - {formatTime(booking.end_time)}
+                  <Clock className="w-6 h-6 text-slate-400" /> {formatTime(booking.start_time)} - {formatTime(booking.end_time)}
                 </p>
               </div>
               <div className="bg-white/5 border border-white/5 rounded-2xl p-6 hover:bg-white/10 transition-colors">
                 <p className="text-slate-400 text-xs font-bold uppercase tracking-widest mb-2">Location</p>
                 <p className="text-xl font-bold text-white flex items-center gap-3">
-                  <span className="text-2xl">📍</span> {room?.location}
+                  <MapPin className="w-6 h-6 text-slate-400" /> {room?.location}
                 </p>
               </div>
               <div className="bg-white/5 border border-white/5 rounded-2xl p-6 hover:bg-white/10 transition-colors">
                 <p className="text-slate-400 text-xs font-bold uppercase tracking-widest mb-2">Capacity</p>
                 <p className="text-xl font-bold text-white flex items-center gap-3">
-                  <span className="text-2xl">👥</span> {room?.capacity} <span className="text-sm font-normal text-slate-400">persons</span>
+                  <Users className="w-6 h-6 text-slate-400" /> {room?.capacity} <span className="text-sm font-normal text-slate-400">persons</span>
                 </p>
               </div>
             </div>

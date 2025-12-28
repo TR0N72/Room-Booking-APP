@@ -26,7 +26,7 @@ export function RoomCard({ room }: RoomCardProps) {
           </div>
         )}
         <div className="flex-1 flex flex-col relative z-10">
-          <h3 className="text-xl font-heading font-bold text-white mb-2 group-hover:text-hima-link transition-colors">{room.name}</h3>
+          <h3 className="text-xl font-heading text-white mb-2 group-hover:text-hima-link transition-colors">{room.name}</h3>
           <p className="text-slate-300 text-sm mb-6 line-clamp-2 leading-relaxed flex-1">{room.description}</p>
 
           <div className="grid grid-cols-2 gap-3 text-sm border-t border-white/10 pt-4 mt-auto">

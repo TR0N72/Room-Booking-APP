@@ -102,10 +102,10 @@ export default function AdminBookingsPage() {
     <ProtectedRoute>
       <MainLayout>
         <div className="max-w-6xl mx-auto px-4 py-8">
-          <h1 className="text-4xl font-bold text-white mb-8">Manage Bookings</h1>
+          <h1 className="text-4xl text-white mb-8">Manage Bookings</h1>
 
           <div className="mb-8">
-            <h2 className="text-2xl font-bold text-white mb-4">Pending Approvals ({pendingBookings.length})</h2>
+            <h2 className="text-2xl text-white mb-4">Pending Approvals ({pendingBookings.length})</h2>
 
             {pendingBookings.length === 0 ? (
               <p className="text-slate-400">No pending bookings</p>
@@ -115,7 +115,7 @@ export default function AdminBookingsPage() {
                   <div key={booking.id} className="bg-yellow-500/10 border border-yellow-500/30 rounded-2xl p-6 backdrop-blur-sm">
                     <div className="flex justify-between items-start mb-4">
                       <div>
-                        <h3 className="text-lg font-semibold text-white">{booking.rooms?.name || "Room"}</h3>
+                        <h3 className="text-lg text-white">{booking.rooms?.name || "Room"}</h3>
                         <p className="text-slate-300 text-sm">
                           {formatDate(booking.start_date)} • {formatTime(booking.start_time)} - {formatTime(booking.end_time)}
                         </p>
@@ -152,7 +152,7 @@ export default function AdminBookingsPage() {
           </div>
 
           <div>
-            <h2 className="text-2xl font-bold text-white mb-4">Approved Bookings ({approvedBookings.length})</h2>
+            <h2 className="text-2xl text-white mb-4">Approved Bookings ({approvedBookings.length})</h2>
 
             {approvedBookings.length === 0 ? (
               <p className="text-slate-400">No approved bookings</p>
@@ -162,7 +162,7 @@ export default function AdminBookingsPage() {
                   <div key={booking.id} className="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-md">
                     <div className="flex justify-between items-start mb-4">
                       <div>
-                        <h3 className="text-lg font-semibold text-white">{booking.rooms?.name || "Room"}</h3>
+                        <h3 className="text-lg text-white">{booking.rooms?.name || "Room"}</h3>
                         <p className="text-slate-300 text-sm">
                           {formatDate(booking.start_date)} • {formatTime(booking.start_time)} - {formatTime(booking.end_time)}
                         </p>

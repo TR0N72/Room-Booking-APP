@@ -72,7 +72,7 @@ export default function LoginPage() {
                 />
               </div>
             </div>
-            <h1 className="text-4xl font-bold text-white mb-3">
+            <h1 className="text-4xl text-white mb-3">
               Welcome Back
             </h1>
             <p className="text-slate-300 text-sm tracking-wide uppercase">

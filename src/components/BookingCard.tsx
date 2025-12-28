@@ -1,5 +1,7 @@
 "use client";
 
+import { CalendarDays, Clock } from "lucide-react";
+
 import { Booking, Room } from "@/types";
 import Link from "next/link";
 import { formatDate, formatTime } from "@/lib/utils";
@@ -32,17 +34,17 @@ export function BookingCard({ booking, room }: BookingCardProps) {
 
         <div className="relative z-10">
           <div className="flex justify-between items-start mb-4">
-            <h3 className="text-lg font-heading font-bold text-white group-hover:text-hima-link transition-colors">{room?.name || "Room"}</h3>
+            <h3 className="text-lg font-heading text-white group-hover:text-hima-link transition-colors">{room?.name || "Room"}</h3>
             <span className={`px-3 py-1 rounded-full text-[10px] uppercase tracking-wider font-bold ${getStatusColor(booking.status)}`}>{booking.status}</span>
           </div>
 
           <div className="space-y-2">
             <div className="flex items-center text-sm text-slate-300 group-hover:text-white transition-colors">
-              <span className="w-6 opacity-60">📅</span>
+              <CalendarDays className="w-4 h-4 opacity-70" />
               {formatDate(booking.start_date)}
             </div>
             <div className="flex items-center text-sm text-slate-300 group-hover:text-white transition-colors">
-              <span className="w-6 opacity-60">⏰</span>
+              <Clock className="w-4 h-4 opacity-70" />
               {formatTime(booking.start_time)} - {formatTime(booking.end_time)}
             </div>
           </div>
