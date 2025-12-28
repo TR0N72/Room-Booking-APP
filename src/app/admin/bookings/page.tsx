@@ -102,46 +102,46 @@ export default function AdminBookingsPage() {
     <ProtectedRoute>
       <MainLayout>
         <div className="max-w-6xl mx-auto px-4 py-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-8">Manage Bookings</h1>
+          <h1 className="text-4xl font-bold text-white mb-8">Manage Bookings</h1>
 
           <div className="mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Pending Approvals ({pendingBookings.length})</h2>
+            <h2 className="text-2xl font-bold text-white mb-4">Pending Approvals ({pendingBookings.length})</h2>
 
             {pendingBookings.length === 0 ? (
-              <p className="text-gray-600">No pending bookings</p>
+              <p className="text-slate-400">No pending bookings</p>
             ) : (
               <div className="space-y-4">
                 {pendingBookings.map((booking) => (
-                  <div key={booking.id} className="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
+                  <div key={booking.id} className="bg-yellow-500/10 border border-yellow-500/30 rounded-2xl p-6 backdrop-blur-sm">
                     <div className="flex justify-between items-start mb-4">
                       <div>
-                        <h3 className="text-lg font-semibold text-gray-900">{booking.rooms?.name || "Room"}</h3>
-                        <p className="text-gray-600 text-sm">
+                        <h3 className="text-lg font-semibold text-white">{booking.rooms?.name || "Room"}</h3>
+                        <p className="text-slate-300 text-sm">
                           {formatDate(booking.start_date)} • {formatTime(booking.start_time)} - {formatTime(booking.end_time)}
                         </p>
                       </div>
                       <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(booking.status)}`}>{booking.status}</span>
                     </div>
 
-                    <div className="bg-white rounded p-3 mb-4 text-sm">
-                      <p className="text-gray-600">
+                    <div className="bg-black/20 rounded-xl p-3 mb-4 text-sm border border-white/5">
+                      <p className="text-slate-300">
                         <strong>Location:</strong> {booking.rooms?.location}
                       </p>
-                      <p className="text-gray-600">
+                      <p className="text-slate-300">
                         <strong>Capacity:</strong> {booking.rooms?.capacity} persons
                       </p>
                       {booking.notes && (
-                        <p className="text-gray-600">
+                        <p className="text-slate-300">
                           <strong>Notes:</strong> {booking.notes}
                         </p>
                       )}
                     </div>
 
                     <div className="flex gap-3">
-                      <button onClick={() => handleApprove(booking.id)} className="flex-1 bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 font-medium">
+                      <button onClick={() => handleApprove(booking.id)} className="flex-1 bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 font-medium transition-colors">
                         Approve
                       </button>
-                      <button onClick={() => handleReject(booking.id)} className="flex-1 bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 font-medium">
+                      <button onClick={() => handleReject(booking.id)} className="flex-1 bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 font-medium transition-colors">
                         Reject
                       </button>
                     </div>
@@ -152,18 +152,18 @@ export default function AdminBookingsPage() {
           </div>
 
           <div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Approved Bookings ({approvedBookings.length})</h2>
+            <h2 className="text-2xl font-bold text-white mb-4">Approved Bookings ({approvedBookings.length})</h2>
 
             {approvedBookings.length === 0 ? (
-              <p className="text-gray-600">No approved bookings</p>
+              <p className="text-slate-400">No approved bookings</p>
             ) : (
               <div className="space-y-4">
                 {approvedBookings.map((booking) => (
-                  <div key={booking.id} className="bg-green-50 border border-green-200 rounded-lg p-6">
+                  <div key={booking.id} className="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-md">
                     <div className="flex justify-between items-start mb-4">
                       <div>
-                        <h3 className="text-lg font-semibold text-gray-900">{booking.rooms?.name || "Room"}</h3>
-                        <p className="text-gray-600 text-sm">
+                        <h3 className="text-lg font-semibold text-white">{booking.rooms?.name || "Room"}</h3>
+                        <p className="text-slate-300 text-sm">
                           {formatDate(booking.start_date)} • {formatTime(booking.start_time)} - {formatTime(booking.end_time)}
                         </p>
                       </div>
@@ -171,12 +171,12 @@ export default function AdminBookingsPage() {
                     </div>
 
                     {booking.token && (
-                      <div className="bg-white rounded p-3 mb-4 text-sm border-l-4 border-green-600">
-                        <p className="text-gray-600 mb-1">
+                      <div className="bg-black/20 rounded-xl p-3 mb-4 text-sm border-l-4 border-green-500">
+                        <p className="text-slate-400 mb-1">
                           <strong>Token:</strong>
                         </p>
-                        <p className="font-mono text-gray-900 break-all">{booking.token}</p>
-                        {booking.token_expires_at && <p className="text-gray-600 text-xs mt-1">Expires: {formatDate(booking.token_expires_at)}</p>}
+                        <p className="font-mono text-white break-all">{booking.token}</p>
+                        {booking.token_expires_at && <p className="text-slate-400 text-xs mt-1">Expires: {formatDate(booking.token_expires_at)}</p>}
                       </div>
                     )}
                   </div>

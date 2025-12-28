@@ -9,40 +9,24 @@ import { Calendar, Zap, Smartphone } from "lucide-react";
 export default function Home() {
   const router = useRouter();
   const [user, setUser] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const checkUser = async () => {
       try {
         const currentUser = await authService.getCurrentUser();
         setUser(currentUser);
-        if (currentUser) {
-          router.push("/dashboard");
-        }
+        // Removed auto-redirect to prevent flashing/glitching
       } catch (error) {
         console.error("Error checking auth:", error);
-      } finally {
-        setLoading(false);
       }
     };
 
     checkUser();
-  }, [router]);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
-        <div className="flex flex-col items-center gap-4">
-          <div className="w-12 h-12 border-4 border-blue-500/30 border-t-blue-500 rounded-full animate-spin" />
-          <p className="text-slate-400 animate-pulse">Loading experience...</p>
-        </div>
-      </div>
-    );
-  }
+  }, []);
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-hima-main">
-      {/* Background Decoratives */}
+      {/* ... (Background Decoratives remain same) ... */}
       <div className="absolute inset-0 w-full h-full overflow-hidden z-0 pointer-events-none">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-hima-secondary/20 rounded-full blur-[100px] -translate-y-1/2" />
         <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[120px] translate-y-1/3" />
@@ -64,28 +48,38 @@ export default function Home() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-5 w-full max-w-md lg:max-w-none justify-center lg:justify-start">
-              <Link href="/auth/login" className="w-full sm:w-auto">
-                <button className="w-full sm:w-auto bg-hima-secondary text-white px-8 py-4 rounded-xl font-bold hover:bg-white/10 hover:shadow-lg hover:shadow-black/25 transition-all transform hover:-translate-y-0.5 active:translate-y-0 border border-transparent hover:border-white/10">
-                  Sign In
-                </button>
-              </Link>
-              <Link href="/auth/register" className="w-full sm:w-auto">
-                <button className="w-full sm:w-auto bg-white/5 border border-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-xl font-bold hover:bg-white/10 transition-all transform hover:-translate-y-0.5 active:translate-y-0">
-                  Create Account
-                </button>
-              </Link>
+              {user ? (
+                <Link href="/dashboard" className="w-full sm:w-auto">
+                  <button className="w-full sm:w-auto bg-hima-secondary text-white px-8 py-4 rounded-xl font-bold hover:bg-white/10 hover:shadow-lg hover:shadow-black/25 transition-all transform hover:-translate-y-0.5 active:translate-y-0 border border-transparent hover:border-white/10">
+                    Go to Dashboard
+                  </button>
+                </Link>
+              ) : (
+                <>
+                  <Link href="/auth/login" className="w-full sm:w-auto">
+                    <button className="w-full sm:w-auto bg-hima-secondary text-white px-8 py-4 rounded-xl font-bold hover:bg-white/10 hover:shadow-lg hover:shadow-black/25 transition-all transform hover:-translate-y-0.5 active:translate-y-0 border border-transparent hover:border-white/10">
+                      Sign In
+                    </button>
+                  </Link>
+                  <Link href="/auth/register" className="w-full sm:w-auto">
+                    <button className="w-full sm:w-auto bg-white/5 border border-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-xl font-bold hover:bg-white/10 transition-all transform hover:-translate-y-0.5 active:translate-y-0">
+                      Create Account
+                    </button>
+                  </Link>
+                </>
+              )}
             </div>
           </div>
 
           {/* Right Column: Logo/Visual */}
           <div className="flex justify-center items-center order-1 lg:order-2">
-            <div className="relative group w-64 h-64 lg:w-96 lg:h-96">
-              <div className="absolute inset-0 bg-hima-secondary/20 blur-3xl rounded-full group-hover:bg-hima-secondary/30 transition-all duration-500" />
-              <div className="relative w-full h-full bg-white/5 rounded-full p-10 shadow-2xl ring-1 ring-white/10 backdrop-blur-md flex items-center justify-center transform group-hover:scale-105 transition-transform duration-500 animate-float">
+            <div className="relative group w-64 h-64 lg:w-96 lg:h-96 flex items-center justify-center">
+              <div className="absolute inset-0 bg-hima-secondary/20 blur-[80px] rounded-full group-hover:bg-hima-secondary/30 transition-all duration-500 animate-pulse" />
+              <div className="relative w-48 h-48 lg:w-64 lg:h-64 bg-white/5 rounded-3xl p-6 shadow-2xl ring-1 ring-white/10 backdrop-blur-xl flex items-center justify-center transform group-hover:scale-105 group-hover:rotate-3 transition-all duration-500 animate-float border border-white/5">
                 <img
-                  src="/himaskom-logo.png"
-                  alt="HIMASKOM Logo"
-                  className="w-full h-full object-contain drop-shadow-2xl"
+                  src="/hima-logo.png"
+                  alt="HIMA RBC Logo"
+                  className="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(145,216,247,0.3)]"
                 />
               </div>
             </div>

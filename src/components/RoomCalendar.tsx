@@ -49,8 +49,8 @@ export function RoomCalendar({ bookings }: RoomCalendarProps) {
     return (
         <div className="flex flex-col md:flex-row gap-8">
             <div className="flex-1">
-                <h3 className="text-xl font-semibold mb-4 text-gray-800">Room Availability</h3>
-                <div className="calendar-container p-4 bg-white rounded-lg shadow-sm border border-gray-100">
+                <h3 className="text-xl font-heading font-semibold mb-4 text-white">Room Availability</h3>
+                <div className="calendar-container p-6 bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 shadow-xl">
                     <Calendar
                         onChange={(val) => setDate(val as Date)}
                         value={date}
@@ -59,56 +59,61 @@ export function RoomCalendar({ bookings }: RoomCalendarProps) {
                         minDate={new Date()}
                     />
                 </div>
-                <div className="mt-4 flex gap-4 text-sm text-gray-600">
+                <div className="mt-4 flex gap-4 text-sm text-slate-400 pl-2">
                     <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 rounded-full bg-red-500" />
+                        <div className="w-2 h-2 rounded-full bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.5)]" />
                         <span>Booked</span>
                     </div>
                     <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 rounded-full bg-yellow-500" />
+                        <div className="w-2 h-2 rounded-full bg-yellow-500 shadow-[0_0_8px_rgba(234,179,8,0.5)]" />
                         <span>Pending</span>
                     </div>
                 </div>
             </div>
 
             <div className="flex-1">
-                <h3 className="text-xl font-semibold mb-4 text-gray-800">
-                    Schedule for {format(date, "MMMM d, yyyy")}
+                <h3 className="text-xl font-heading font-semibold mb-4 text-white">
+                    Schedule for <span className="text-hima-link">{format(date, "MMMM d, yyyy")}</span>
                 </h3>
 
-                <div className="bg-gray-50 rounded-lg p-6 min-h-[300px]">
+                <div className="bg-white/5 backdrop-blur-md rounded-2xl p-6 min-h-[300px] border border-white/10 shadow-inner">
                     {selectedDateBookings.length > 0 ? (
                         <div className="space-y-4">
                             {selectedDateBookings.map((booking) => (
                                 <div
                                     key={booking.id}
-                                    className={`p-4 rounded-lg border-l-4 ${booking.status === 'approved'
-                                            ? 'bg-white border-red-500 shadow-sm'
-                                            : 'bg-white border-yellow-500 shadow-sm'
+                                    className={`p-4 rounded-xl border-l-4 transition-all hover:bg-white/5 ${booking.status === 'approved'
+                                        ? 'bg-white/5 border-red-500'
+                                        : 'bg-white/5 border-yellow-500'
                                         }`}
                                 >
                                     <div className="flex justify-between items-start">
-                                        <div>
-                                            <p className="font-semibold text-gray-900">
-                                                {booking.start_time} - {booking.end_time}
-                                            </p>
-                                            <span className={`text-xs px-2 py-1 rounded-full mt-2 inline-block ${booking.status === 'approved'
-                                                    ? 'bg-red-100 text-red-800'
-                                                    : 'bg-yellow-100 text-yellow-800'
-                                                }`}>
-                                                {booking.status.charAt(0).toUpperCase() + booking.status.slice(1)}
-                                            </span>
+                                        <div className="w-full">
+                                            <div className="flex justify-between items-center mb-2">
+                                                <p className="font-bold text-white text-lg">
+                                                    {booking.start_time} - {booking.end_time}
+                                                </p>
+                                                <span className={`text-xs px-2 py-1 rounded-full font-bold ${booking.status === 'approved'
+                                                    ? 'bg-red-500/20 text-red-300'
+                                                    : 'bg-yellow-500/20 text-yellow-300'
+                                                    }`}>
+                                                    {booking.status.charAt(0).toUpperCase() + booking.status.slice(1)}
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
                                     {booking.notes && (
-                                        <p className="text-gray-500 text-sm mt-2">{booking.notes}</p>
+                                        <p className="text-slate-400 text-sm italic border-t border-white/5 pt-2 mt-2">{booking.notes}</p>
                                     )}
                                 </div>
                             ))}
                         </div>
                     ) : (
-                        <div className="h-full flex flex-col items-center justify-center text-gray-400">
-                            <p className="text-lg">No bookings for this date</p>
+                        <div className="h-full flex flex-col items-center justify-center text-slate-500 gap-2">
+                            <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-2">
+                                <span className="text-2xl">✨</span>
+                            </div>
+                            <p className="text-lg font-medium text-slate-300">No bookings for this date</p>
                             <p className="text-sm">This room is free all day!</p>
                         </div>
                     )}

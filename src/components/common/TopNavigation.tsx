@@ -5,6 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { authService } from "@/services/auth";
 import { toast } from "sonner";
+import { Hexagon } from "lucide-react";
 
 export function TopNavigation() {
     const pathname = usePathname();
@@ -52,26 +53,26 @@ export function TopNavigation() {
     return (
         <nav
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-white/5 ${isScrolled
-                    ? "bg-hima-secondary/90 backdrop-blur-xl shadow-lg shadow-black/10 py-2"
-                    : "bg-hima-secondary/60 backdrop-blur-sm py-4"
+                ? "bg-hima-secondary/90 backdrop-blur-xl shadow-lg shadow-black/10 py-2"
+                : "bg-hima-secondary/60 backdrop-blur-sm py-4"
                 }`}
         >
             <div className="max-w-7xl mx-auto px-4 md:px-6">
                 <div className="flex items-center justify-between">
 
                     {/* Logo / Brand (Visible on larger screens or as icon on mobile) */}
-                    <div className="flex-shrink-0 flex items-center gap-3">
-                        <div className="relative w-8 h-8 md:w-10 md:h-10 bg-white/10 rounded-full p-1.5 shadow-lg ring-1 ring-white/10 backdrop-blur-md flex items-center justify-center">
+                    <Link href="/" className="flex-shrink-0 flex items-center gap-3 group">
+                        <div className="relative w-8 h-8 md:w-10 md:h-10 bg-transparent rounded-xl p-0.5 shadow-sm ring-0 backdrop-blur-md flex items-center justify-center transition-all duration-300 group-hover:scale-110">
                             <img
-                                src="/himaskom-logo.png"
-                                alt="HIMASKOM"
-                                className="w-full h-full object-contain drop-shadow-md"
+                                src="/hima-logo.png"
+                                alt="HIMA RBC Logo"
+                                className="w-full h-full object-contain"
                             />
                         </div>
-                        <span className="hidden md:block font-bold text-lg text-white tracking-tight">
-                            HIMA<span className="text-hima-link">RBC</span>
+                        <span className="hidden md:block font-bold text-lg text-white tracking-tight group-hover:text-hima-link transition-colors">
+                            HIMA<span className="text-hima-link group-hover:text-white transition-colors">RBC</span>
                         </span>
-                    </div>
+                    </Link>
 
                     {/* Navigation Links */}
                     <div className="flex items-center gap-1 md:gap-2 overflow-x-auto no-scrollbar mask-gradient px-2 md:px-0">

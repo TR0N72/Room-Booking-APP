@@ -69,48 +69,55 @@ export default function RoomDetailPage() {
     <ProtectedRoute>
       <MainLayout>
         <div className="max-w-6xl mx-auto px-4 py-8">
-          <button onClick={() => router.back()} className="mb-6 text-blue-600 hover:text-blue-700 font-medium">
-            ← Back
+          <button onClick={() => router.back()} className="mb-8 text-hima-link hover:text-white font-medium flex items-center gap-2 transition-colors group">
+            <span className="group-hover:-translate-x-1 transition-transform">←</span> Back
           </button>
 
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
+          <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden shadow-2xl mb-8">
             {room.image_url && (
-              <div className="w-full h-64 bg-gray-200 overflow-hidden">
+              <div className="w-full h-80 bg-slate-800 relative group">
+                <div className="absolute inset-0 bg-gradient-to-t from-hima-main via-transparent to-transparent opacity-60" />
                 <img src={room.image_url} alt={room.name} className="w-full h-full object-cover" />
               </div>
             )}
 
-            <div className="p-8">
+            <div className="p-8 md:p-10">
               <div className="flex flex-col md:flex-row justify-between items-start gap-8">
                 <div className="flex-1">
-                  <h1 className="text-4xl font-bold text-gray-900 mb-4">{room.name}</h1>
-                  <p className="text-gray-600 text-lg mb-6">{room.description}</p>
+                  <h1 className="text-4xl md:text-5xl font-heading font-bold text-white mb-4 tracking-tight">{room.name}</h1>
+                  <p className="text-slate-300 text-lg leading-relaxed">{room.description}</p>
                 </div>
 
-                <div className="w-full md:w-auto">
-                  <button onClick={handleBookNow} className="w-full md:w-auto px-8 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors shadow-md">
+                <div className="w-full md:w-auto flex-shrink-0">
+                  <button onClick={handleBookNow} className="w-full md:w-auto px-10 py-4 bg-hima-secondary text-white rounded-xl font-bold hover:bg-white/10 hover:shadow-lg hover:shadow-hima-secondary/20 transition-all transform hover:-translate-y-0.5 border border-transparent hover:border-white/10">
                     Book This Room
                   </button>
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 mt-4">
-                <div className="bg-blue-50 rounded-lg p-4">
-                  <p className="text-gray-600 text-sm">Capacity</p>
-                  <p className="text-2xl font-bold text-gray-900">{room.capacity} persons</p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-10 border-y border-white/10 py-8">
+                <div className="bg-white/5 rounded-2xl p-6 border border-white/5 hover:bg-white/10 transition-colors">
+                  <p className="text-hima-link text-xs uppercase tracking-widest font-bold mb-2">Capacity</p>
+                  <p className="text-3xl font-bold text-white">{room.capacity} <span className="text-lg text-slate-400 font-normal">persons</span></p>
                 </div>
-                <div className="bg-green-50 rounded-lg p-4">
-                  <div className="bg-purple-50 rounded-lg p-4">
-                    <p className="text-gray-600 text-sm">Status</p>
-                    <p className="text-2xl font-bold text-green-600">Available</p>
-                  </div>
-                  <p className="text-gray-600 text-sm">Location</p>
-                  <p className="text-lg font-semibold text-gray-900">{room.location}</p>
+                <div className="bg-white/5 rounded-2xl p-6 border border-white/5 hover:bg-white/10 transition-colors">
+                  <p className="text-hima-link text-xs uppercase tracking-widest font-bold mb-2">Status</p>
+                  <p className="text-3xl font-bold text-emerald-400 flex items-center gap-2">
+                    <span className="w-3 h-3 rounded-full bg-emerald-500 animate-pulse" />
+                    Available
+                  </p>
+                </div>
+                <div className="bg-white/5 rounded-2xl p-6 border border-white/5 hover:bg-white/10 transition-colors">
+                  <p className="text-hima-link text-xs uppercase tracking-widest font-bold mb-2">Location</p>
+                  <p className="text-xl font-bold text-white mt-1">{room.location}</p>
                 </div>
               </div>
 
-              <div className="border-t border-gray-100 pt-8 mt-8">
-                <RoomCalendar bookings={bookings} />
+              <div className="pt-2">
+                <h3 className="text-2xl font-heading font-bold text-white mb-6">Room Availability</h3>
+                <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
+                  <RoomCalendar bookings={bookings} />
+                </div>
               </div>
             </div>
           </div>

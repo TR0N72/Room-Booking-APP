@@ -88,7 +88,7 @@ export default function AdminPage() {
               <div className="bg-blue-500/10 backdrop-blur-lg rounded-2xl p-6 cursor-pointer hover:bg-blue-500/20 hover:scale-[1.02] transition-all border border-blue-500/20 group">
                 <h2 className="text-xl font-bold text-white mb-2 group-hover:text-blue-300 transition-colors">Manage Rooms</h2>
                 <p className="text-slate-300 mb-4">Add, edit, or delete meeting rooms</p>
-                <div className="text-blue-400 font-medium group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">Go to Rooms <span>→</span></div>
+                <div className="text-hima-link font-medium group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">Go to Rooms <span>→</span></div>
               </div>
             </Link>
 

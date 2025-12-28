@@ -61,36 +61,39 @@ export default function AnalyticsPage() {
         <ProtectedRoute>
             <MainLayout>
                 <div className="max-w-7xl mx-auto px-4 py-8">
-                    <h1 className="text-3xl font-bold text-gray-900 mb-8">📊 Analytics Dashboard</h1>
+                    <h1 className="text-3xl font-bold text-white mb-8">📊 Analytics Dashboard</h1>
 
                     {/* Key Metrics Cards */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                        <div className="bg-white p-6 rounded-xl shadow-md border-l-4 border-blue-500">
-                            <p className="text-gray-500 text-sm font-medium">Total Bookings</p>
-                            <p className="text-3xl font-bold text-gray-900">{stats?.totalBookings}</p>
+                        <div className="bg-white/5 backdrop-blur-md p-6 rounded-xl border border-white/10 border-l-4 border-l-blue-500">
+                            <p className="text-slate-400 text-sm font-medium">Total Bookings</p>
+                            <p className="text-3xl font-bold text-white">{stats?.totalBookings}</p>
                         </div>
 
-                        <div className="bg-white p-6 rounded-xl shadow-md border-l-4 border-purple-500">
-                            <p className="text-gray-500 text-sm font-medium">Utilization Rate</p>
-                            <p className="text-3xl font-bold text-gray-900">{stats?.utilizationRate}%</p>
+                        <div className="bg-white/5 backdrop-blur-md p-6 rounded-xl border border-white/10 border-l-4 border-l-purple-500">
+                            <p className="text-slate-400 text-sm font-medium">Utilization Rate</p>
+                            <p className="text-3xl font-bold text-white">{stats?.utilizationRate}%</p>
                         </div>
-                        <div className="bg-white p-6 rounded-xl shadow-md border-l-4 border-orange-500">
-                            <p className="text-gray-500 text-sm font-medium">Avg Duration</p>
-                            <p className="text-3xl font-bold text-gray-900">{stats?.averageBookingDuration} hrs</p>
+                        <div className="bg-white/5 backdrop-blur-md p-6 rounded-xl border border-white/10 border-l-4 border-l-orange-500">
+                            <p className="text-slate-400 text-sm font-medium">Avg Duration</p>
+                            <p className="text-3xl font-bold text-white">{stats?.averageBookingDuration} hrs</p>
                         </div>
                     </div>
 
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
                         {/* Room Popularity Chart */}
-                        <div className="bg-white p-6 rounded-xl shadow-md">
-                            <h2 className="text-xl font-bold mb-6 text-gray-800">Most Popular Rooms</h2>
+                        <div className="bg-white/5 backdrop-blur-md p-6 rounded-xl border border-white/10">
+                            <h2 className="text-xl font-bold mb-6 text-white">Most Popular Rooms</h2>
                             <div className="h-64">
                                 <ResponsiveContainer width="100%" height="100%">
                                     <BarChart data={roomPopularity}>
-                                        <CartesianGrid strokeDasharray="3 3" />
-                                        <XAxis dataKey="name" />
-                                        <YAxis />
-                                        <Tooltip />
+                                        <CartesianGrid strokeDasharray="3 3" stroke="#ffffff20" />
+                                        <XAxis dataKey="name" stroke="#94a3b8" />
+                                        <YAxis stroke="#94a3b8" />
+                                        <Tooltip
+                                            contentStyle={{ backgroundColor: '#1e293b', borderColor: '#334155', color: '#f8fafc' }}
+                                            itemStyle={{ color: '#f8fafc' }}
+                                        />
                                         <Bar dataKey="bookings" fill="#3b82f6" radius={[4, 4, 0, 0]} name="Bookings" />
                                     </BarChart>
                                 </ResponsiveContainer>
@@ -98,8 +101,8 @@ export default function AnalyticsPage() {
                         </div>
 
                         {/* Booking Status Distribution */}
-                        <div className="bg-white p-6 rounded-xl shadow-md">
-                            <h2 className="text-xl font-bold mb-6 text-gray-800">Booking Status</h2>
+                        <div className="bg-white/5 backdrop-blur-md p-6 rounded-xl border border-white/10">
+                            <h2 className="text-xl font-bold mb-6 text-white">Booking Status</h2>
                             <div className="h-64">
                                 <ResponsiveContainer width="100%" height="100%">
                                     <PieChart>
@@ -113,11 +116,14 @@ export default function AnalyticsPage() {
                                             label
                                         >
                                             {statusDist.map((entry, index) => (
-                                                <Cell key={`cell-${index}`} fill={entry.color} />
+                                                <Cell key={`cell-${index}`} fill={entry.color} stroke="none" />
                                             ))}
                                         </Pie>
-                                        <Tooltip />
-                                        <Legend />
+                                        <Tooltip
+                                            contentStyle={{ backgroundColor: '#1e293b', borderColor: '#334155', color: '#f8fafc' }}
+                                            itemStyle={{ color: '#f8fafc' }}
+                                        />
+                                        <Legend wrapperStyle={{ color: '#94a3b8' }} />
                                     </PieChart>
                                 </ResponsiveContainer>
                             </div>
@@ -125,16 +131,19 @@ export default function AnalyticsPage() {
                     </div>
 
                     {/* Monthly Activity */}
-                    <div className="bg-white p-6 rounded-xl shadow-md mb-8">
-                        <h2 className="text-xl font-bold mb-6 text-gray-800">Monthly Activity Trends</h2>
+                    <div className="bg-white/5 backdrop-blur-md p-6 rounded-xl border border-white/10 mb-8">
+                        <h2 className="text-xl font-bold mb-6 text-white">Monthly Activity Trends</h2>
                         <div className="h-72">
                             <ResponsiveContainer width="100%" height="100%">
                                 <LineChart data={monthlyActivity}>
-                                    <CartesianGrid strokeDasharray="3 3" />
-                                    <XAxis dataKey="month" />
-                                    <YAxis />
-                                    <Tooltip />
-                                    <Legend />
+                                    <CartesianGrid strokeDasharray="3 3" stroke="#ffffff20" />
+                                    <XAxis dataKey="month" stroke="#94a3b8" />
+                                    <YAxis stroke="#94a3b8" />
+                                    <Tooltip
+                                        contentStyle={{ backgroundColor: '#1e293b', borderColor: '#334155', color: '#f8fafc' }}
+                                        itemStyle={{ color: '#f8fafc' }}
+                                    />
+                                    <Legend wrapperStyle={{ color: '#94a3b8' }} />
                                     <Line type="monotone" dataKey="bookings" stroke="#8884d8" strokeWidth={2} activeDot={{ r: 8 }} name="Bookings" />
                                 </LineChart>
                             </ResponsiveContainer>
