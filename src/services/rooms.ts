@@ -64,7 +64,13 @@ export const roomService = {
   async updateRoom(id: string, room: Partial<Room>) {
     if (!supabase) return { ...room, id };
     try {
-      const { data, error } = await supabase.from("rooms").update(room).eq("id", id).select().single();
+      // Always update the updated_at timestamp
+      const { data, error } = await supabase
+        .from("rooms")
+        .update({ ...room, updated_at: new Date().toISOString() })
+        .eq("id", id)
+        .select()
+        .single();
 
       if (error) throw error;
       return data;

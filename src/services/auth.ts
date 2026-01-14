@@ -19,6 +19,8 @@ const MOCK_USER: User = {
 
 const MOCK_SESSION_KEY = "room_booking_mock_session";
 const MOCK_USER_ROLE_KEY = "room_booking_mock_role";
+const MOCK_USER_EMAIL_KEY = "room_booking_mock_email";
+const MOCK_USER_NAME_KEY = "room_booking_mock_name";
 
 export const authService = {
   async register(email: string, password: string, fullName: string) {
@@ -29,6 +31,8 @@ export const authService = {
       if (typeof window !== "undefined") {
         localStorage.setItem(MOCK_SESSION_KEY, "true");
         localStorage.setItem(MOCK_USER_ROLE_KEY, "user");
+        localStorage.setItem(MOCK_USER_EMAIL_KEY, email);
+        localStorage.setItem(MOCK_USER_NAME_KEY, fullName);
       }
       return { success: true, user: { ...MOCK_USER, email, full_name: fullName } };
     }
@@ -67,10 +71,11 @@ export const authService = {
         // Simple logic: if email contains "admin", log them in as admin
         const isAdmin = email.toLowerCase().includes("admin");
         localStorage.setItem(MOCK_USER_ROLE_KEY, isAdmin ? "admin" : "user");
+        localStorage.setItem(MOCK_USER_EMAIL_KEY, email);
 
         return {
           success: true,
-          user: isAdmin ? MOCK_ADMIN : { ...MOCK_USER, email }
+          user: isAdmin ? { ...MOCK_ADMIN, email } : { ...MOCK_USER, email }
         };
       }
       return { success: true, user: MOCK_USER };
@@ -95,6 +100,8 @@ export const authService = {
       if (typeof window !== "undefined") {
         localStorage.removeItem(MOCK_SESSION_KEY);
         localStorage.removeItem(MOCK_USER_ROLE_KEY);
+        localStorage.removeItem(MOCK_USER_EMAIL_KEY);
+        localStorage.removeItem(MOCK_USER_NAME_KEY);
       }
       return { success: true };
     }
@@ -113,7 +120,14 @@ export const authService = {
       // Mock Mode
       if (typeof window !== "undefined" && localStorage.getItem(MOCK_SESSION_KEY)) {
         const role = localStorage.getItem(MOCK_USER_ROLE_KEY);
-        return role === "admin" ? MOCK_ADMIN : MOCK_USER;
+        const email = localStorage.getItem(MOCK_USER_EMAIL_KEY);
+        const fullName = localStorage.getItem(MOCK_USER_NAME_KEY);
+        const baseUser = role === "admin" ? MOCK_ADMIN : MOCK_USER;
+        return {
+          ...baseUser,
+          email: email || baseUser.email,
+          full_name: fullName || baseUser.full_name,
+        };
       }
       return null;
     }
@@ -148,7 +162,8 @@ export const authService = {
     if (!supabase) {
       // Mock Mode - just call back once if session exists
       if (typeof window !== "undefined" && localStorage.getItem(MOCK_SESSION_KEY)) {
-        callback(MOCK_USER);
+        const role = localStorage.getItem(MOCK_USER_ROLE_KEY);
+        callback(role === "admin" ? MOCK_ADMIN : MOCK_USER);
       } else {
         callback(null);
       }

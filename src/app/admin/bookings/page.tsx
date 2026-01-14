@@ -10,7 +10,6 @@ import { Booking, Room } from "@/types";
 import { toast } from "sonner";
 import { formatDate, formatTime } from "@/lib/utils";
 import { useRouter } from "next/navigation";
-import { addHours } from "date-fns";
 
 export default function AdminBookingsPage() {
   const router = useRouter();
@@ -47,7 +46,6 @@ export default function AdminBookingsPage() {
       if (!booking) return;
 
       // Calculate expiration time (end time of booking)
-      const [endHour, endMin] = booking.end_time.split(":").map(Number);
       const expiresAt = new Date(`${booking.start_date}T${booking.end_time}:00`).toISOString();
 
       await bookingService.approveBooking(bookingId, expiresAt);

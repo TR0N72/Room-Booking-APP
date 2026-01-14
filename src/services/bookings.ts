@@ -1,6 +1,6 @@
 import { supabase } from "@/lib/supabase";
 import { Booking } from "@/types";
-import { generateToken } from "@/lib/utils";
+import { generateToken, isTimeSlotAvailable } from "@/lib/utils";
 
 const MOCK_BOOKINGS: Booking[] = [
   {
@@ -33,6 +33,12 @@ export const bookingService = {
       return { ...booking, id: Date.now().toString(), created_at: new Date().toISOString(), updated_at: new Date().toISOString() };
     }
     try {
+      // Check for time slot conflicts before creating booking
+      const unavailableSlots = await this.getUnavailableSlots(booking.room_id, booking.start_date);
+      if (!isTimeSlotAvailable(booking.start_time, booking.end_time, unavailableSlots)) {
+        throw new Error("Time slot is already booked. Please choose a different time.");
+      }
+
       const { data, error } = await supabase.from("bookings").insert([booking]).select().single();
 
       if (error) throw error;
@@ -69,7 +75,8 @@ export const bookingService = {
   async getBookingById(id: string): Promise<Booking | null> {
     if (!supabase) return MOCK_BOOKINGS.find(b => b.id === id) || null;
     try {
-      const { data, error } = await supabase.from("bookings").select("*").eq("id", id).single();
+      // Include room data for consistency with other booking queries
+      const { data, error } = await supabase.from("bookings").select("*, rooms(*)").eq("id", id).single();
 
       if (error) throw error;
       return data;
@@ -137,7 +144,14 @@ export const bookingService = {
   async getUnavailableSlots(roomId: string, date: string) {
     if (!supabase) return [];
     try {
-      const { data, error } = await supabase.from("bookings").select("start_time, end_time").eq("room_id", roomId).eq("start_date", date).in("status", ["approved", "pending"]);
+      // Check for bookings that overlap with the given date (supports multi-day bookings)
+      const { data, error } = await supabase
+        .from("bookings")
+        .select("start_time, end_time, start_date, end_date")
+        .eq("room_id", roomId)
+        .lte("start_date", date)  // Booking starts on or before the date
+        .gte("end_date", date)    // Booking ends on or after the date
+        .in("status", ["approved", "pending"]);
 
       if (error) throw error;
       return data || [];

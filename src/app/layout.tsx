@@ -1,6 +1,8 @@
 import { Montserrat } from "next/font/google";
+import { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "sonner";
+import { ErrorBoundaryWrapper } from "@/components/common/ErrorBoundaryWrapper";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -41,7 +43,9 @@ export default function RootLayout({
         <link href="https://fonts.cdnfonts.com/css/metropolis-2" rel="stylesheet" />
       </head>
       <body className={`${montserrat.variable} bg-hima-main text-slate-100 font-sans antialiased`}>
-        {children}
+        <ErrorBoundaryWrapper>
+          {children}
+        </ErrorBoundaryWrapper>
         <Toaster position="top-right" />
       </body>
     </html>

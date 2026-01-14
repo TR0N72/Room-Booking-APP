@@ -3,16 +3,16 @@
 import { Suspense, useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { MainLayout } from "@/components/common/MainLayout";
-import { createClient } from "@/lib/supabase";
+import { authService } from "@/services/auth";
+import { roomService } from "@/services/rooms";
+import { bookingService } from "@/services/bookings";
 import { toast } from "sonner";
 
-import { User } from "@supabase/supabase-js";
-import { Room } from "@/types";
+import { Room, User } from "@/types";
 
 function CreateBookingPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const supabase = createClient();
 
   const roomId = searchParams.get("roomId");
   const [room, setRoom] = useState<Room | null>(null);
@@ -36,8 +36,8 @@ function CreateBookingPageContent() {
     }
 
     // Get current user
-    supabase.auth.getUser().then(({ data: { user: authUser } }) => {
-      setUser(authUser);
+    authService.getCurrentUser().then((user) => {
+      setUser(user);
     });
 
     fetchRoom();
@@ -45,9 +45,8 @@ function CreateBookingPageContent() {
 
   const fetchRoom = async () => {
     try {
-      const { data, error } = await supabase.from("rooms").select("*").eq("id", roomId).single();
-
-      if (error) throw error;
+      const data = await roomService.getRoomById(roomId!);
+      if (!data) throw new Error("Room not found");
       setRoom(data);
     } catch (error) {
       console.error("Error fetching room:", error);
@@ -79,22 +78,16 @@ function CreateBookingPageContent() {
 
     setSubmitting(true);
     try {
-      const { data, error } = await supabase
-        .from("bookings")
-        .insert({
-          user_id: user.id,
-          room_id: roomId,
-          start_date: formData.startDate,
-          end_date: formData.endDate,
-          start_time: formData.startTime,
-          end_time: formData.endTime,
-          notes: formData.notes,
-          status: "pending",
-        })
-        .select()
-        .single();
-
-      if (error) throw error;
+      await bookingService.createBooking({
+        user_id: user.id,
+        room_id: roomId!,
+        start_date: formData.startDate,
+        end_date: formData.endDate,
+        start_time: formData.startTime,
+        end_time: formData.endTime,
+        notes: formData.notes,
+        status: "pending",
+      });
 
       toast.success("Booking created successfully!");
       router.push("/bookings");

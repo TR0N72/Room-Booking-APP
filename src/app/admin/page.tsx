@@ -1,18 +1,21 @@
 "use client";
 
-import { BarChart3, DoorOpen, CalendarCheck, Users, Clock, LayoutGrid } from "lucide-react";
+import { BarChart3, DoorOpen, CalendarCheck, Clock, LayoutGrid } from "lucide-react";
 
 import { useEffect, useState } from "react";
 import { authService } from "@/services/auth";
 import { roomService } from "@/services/rooms";
 import { bookingService } from "@/services/bookings";
+import { User } from "@/types";
 import { MainLayout } from "@/components/common/MainLayout";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 export default function AdminPage() {
-  const [user, setUser] = useState<any>(null);
-  const [profile, setProfile] = useState<any>(null);
+  const router = useRouter();
+  const [user, setUser] = useState<User | null>(null);
+  const [profile, setProfile] = useState<User | null>(null);
   const [stats, setStats] = useState({
     totalRooms: 0,
     totalBookings: 0,
@@ -30,7 +33,7 @@ export default function AdminPage() {
 
           // Check if user is admin
           if (profileData?.role !== "admin") {
-            window.location.href = "/dashboard";
+            router.push("/dashboard");
             return;
           }
 

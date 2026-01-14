@@ -7,11 +7,11 @@ import { roomService } from "@/services/rooms";
 import { MainLayout } from "@/components/common/MainLayout";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { BookingCard } from "@/components/BookingCard";
-import { Booking, Room } from "@/types";
+import { Booking, User } from "@/types";
 import Link from "next/link";
 
 export default function DashboardPage() {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -76,7 +76,7 @@ export default function DashboardPage() {
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {bookings.slice(0, 6).map((booking) => (
-                  <BookingCard key={booking.id} booking={booking} room={booking.rooms!} />
+                  <BookingCard key={booking.id} booking={booking} room={booking.rooms} />
                 ))}
               </div>
             )}

@@ -2,7 +2,6 @@
 
 import { Room } from "@/types";
 import Link from "next/link";
-import { formatDate } from "@/lib/utils";
 
 interface RoomCardProps {
   room: Room;
