@@ -1,0 +1,93 @@
+.react-calendar {
+  width: 100%;
+  border: none;
+  font-family: inherit;
+  line-height: 1.125em;
+  background: transparent !important;
+}
+
+.react-calendar__navigation {
+  display: flex;
+  height: 44px;
+  margin-bottom: 1em;
+}
+
+.react-calendar__navigation button {
+  min-width: 44px;
+  background: none;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 8px;
+  color: white;
+  /* Updated to white */
+}
+
+.react-calendar__navigation button:disabled {
+  background-color: transparent !important;
+  color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.react-calendar__navigation button:enabled:hover,
+.react-calendar__navigation button:enabled:focus {
+  background-color: rgba(255, 255, 255, 0.1);
+  /* bg-white/10 */
+  border-radius: 8px;
+}
+
+.react-calendar__month-view__weekdays {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.75em;
+  color: #94a3b8;
+  /* slate-400 */
+}
+
+.react-calendar__month-view__days__day--weekend {
+  color: #f87171;
+  /* red-400 */
+}
+
+.react-calendar__tile {
+  max-width: 100%;
+  padding: 10px 6.6667px;
+  background: none !important;
+  text-align: center;
+  line-height: 16px;
+  font-size: 14px;
+  border-radius: 8px;
+  transition: all 0.2s;
+  color: #e2e8f0;
+  /* slate-200 */
+}
+
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #91D8F7;
+  /* hima-link */
+}
+
+.react-calendar__tile--now {
+  background: rgba(40, 90, 163, 0.2) !important;
+  /* hima-secondary/20 */
+  color: #91D8F7;
+  font-weight: bold;
+}
+
+.react-calendar__tile--now:enabled:hover,
+.react-calendar__tile--now:enabled:focus {
+  background: rgba(40, 90, 163, 0.4) !important;
+}
+
+.react-calendar__tile--active {
+  background: #285AA3 !important;
+  /* hima-secondary */
+  color: white !important;
+  box-shadow: 0 0 15px rgba(40, 90, 163, 0.4);
+}
+
+.react-calendar__tile--active:enabled:hover,
+.react-calendar__tile--active:enabled:focus {
+  background: #285AA3;
+}

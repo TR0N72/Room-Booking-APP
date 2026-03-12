@@ -69,6 +69,13 @@ npm run dev
 # Buka http://localhost:3000
 ```
 
+### ⚠️ Mock Mode (Offline/No-Database)
+Jika file `.env.local` tidak ada, aplikasi otomatis masuk **Mock Mode**:
+- **Login Bypass**: Masuk dengan email/password bebas.
+- **Role**: Otomatis login sebagai **Admin**.
+- **Data**: Menggunakan data dummy (RBC, Ruang Hima).
+- **Fitur**: Bisa create booking, approve, dan lihat calendar.
+
 ### 6. Test Features
 
 - Register akun baru
@@ -437,7 +444,7 @@ Aplikasi Anda sudah **Production Ready**!
 ## 🎯 Roadmap (Future)
 
 - [ ] Email notifications
-- [ ] Calendar view
+- [x] Calendar view
 - [ ] User reviews/ratings
 - [ ] Payment integration
 - [ ] Recurring bookings

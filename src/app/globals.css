@@ -1,1 +1,54 @@
 @import "tailwindcss";
+
+@theme {
+    --color-hima-main: #243C5E;
+    --color-hima-secondary: #285AA3;
+    --color-hima-accent: #3b82f6;
+    /* Keeping a bright blue for small accents if needed */
+    --color-hima-link: #91D8F7;
+
+    --font-title: 'Metropolis', sans-serif;
+    --font-subtitle: 'Metropolis', sans-serif;
+    --font-body: var(--font-montserrat), sans-serif;
+}
+
+@layer base {
+
+    h1,
+    h2,
+    h3 {
+        font-family: var(--font-title);
+        font-weight: 800;
+        /* Extra Bold */
+    }
+
+    h4,
+    h5,
+    h6 {
+        font-family: var(--font-subtitle);
+        font-weight: 400;
+        /* Regular */
+    }
+
+    body {
+        font-family: var(--font-body);
+        font-weight: 500;
+        /* Medium */
+    }
+
+    /* Autofill dark mode fix */
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+        /* Update autofill to match new main color roughly, or keep transparent-ish */
+        -webkit-box-shadow: 0 0 0 30px #1e293b inset !important;
+        /* using slate-800 as safe neutral */
+        -webkit-text-fill-color: #e2e8f0 !important;
+        transition: background-color 5000s ease-in-out 0s;
+    }
+
+    a {
+        color: var(--color-hima-link);
+    }
+}

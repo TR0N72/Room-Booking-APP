@@ -14,6 +14,8 @@ Aplikasi PWA lengkap untuk peminjaman ruangan dengan:
 - [x] Riwayat peminjaman dengan filter status
 - [x] View booking token saat approved
 - [x] Profile page dengan info aplikasi
+- [x] **Mock Mode** (Auth Bypass) untuk testing tanpa database
+- [x] **Calendar View** untuk melihat ketersediaan ruangan
 
 ### 🔐 Fitur Admin
 
@@ -110,7 +112,7 @@ room-booking-app/
 | Auth          | Supabase Auth             |
 | Notifications | Sonner                    |
 | PWA           | next-pwa + Service Worker |
-| Date/Time     | Native dropdowns (no lib) |
+| Date/Time     | `date-fns` + `react-calendar` |
 | Deployment    | Vercel                    |
 
 ---
@@ -313,7 +315,7 @@ For issues or questions:
 ## 🎯 Future Enhancements (Optional)
 
 - [ ] Email notifications
-- [ ] Calendar view untuk bookings
+- [x] Calendar view untuk bookings
 - [ ] Room availability heatmap
 - [ ] User reviews/ratings
 - [ ] Recurring bookings

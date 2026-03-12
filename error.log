@@ -1,0 +1,5 @@
+src/app/admin/analytics/page.tsx(112,45): error TS2322: Type 'BookingStatusDistribution[]' is not assignable to type 'ChartDataInput[]'.
+  Type 'BookingStatusDistribution' is not assignable to type 'ChartDataInput'.
+    Index signature for type 'string' is missing in type 'BookingStatusDistribution'.
+src/services/auth.ts(140,55): error TS7006: Parameter 'event' implicitly has an 'any' type.
+src/services/auth.ts(140,62): error TS7006: Parameter 'session' implicitly has an 'any' type.

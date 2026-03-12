@@ -48,15 +48,18 @@ export default function BookingsPage() {
     <ProtectedRoute>
       <MainLayout>
         <div className="max-w-4xl mx-auto px-4 py-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-8">My Bookings</h1>
+          <div className="mb-8">
+            <h1 className="text-4xl md:text-5xl font-heading text-white mb-8 tracking-tight drop-shadow-md">My Bookings</h1>
 
-          <div className="mb-6">
-            <div className="flex gap-2 flex-wrap">
+            <div className="flex gap-2 flex-wrap bg-white/5 p-2 rounded-2xl border border-white/10 w-fit backdrop-blur-sm">
               {["all", "pending", "approved", "completed", "rejected"].map((status) => (
                 <button
                   key={status}
                   onClick={() => setFilterStatus(status)}
-                  className={`px-4 py-2 rounded-lg font-medium transition-colors ${filterStatus === status ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-800 hover:bg-gray-300"}`}
+                  className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all duration-300 ${filterStatus === status
+                    ? "bg-hima-secondary text-white shadow-lg shadow-hima-secondary/25"
+                    : "text-slate-400 hover:text-white hover:bg-white/5"
+                    }`}
                 >
                   {status.charAt(0).toUpperCase() + status.slice(1)}
                 </button>
@@ -65,9 +68,11 @@ export default function BookingsPage() {
           </div>
 
           {loading ? (
-            <p className="text-gray-600">Loading bookings...</p>
+            <p className="text-slate-400 animate-pulse text-lg">Loading bookings...</p>
           ) : filteredBookings.length === 0 ? (
-            <p className="text-gray-600">No bookings found.</p>
+            <div className="bg-white/5 rounded-2xl p-8 text-center border border-white/5">
+              <p className="text-slate-300 text-lg">No bookings found {filterStatus !== 'all' && `in ${filterStatus} status`}.</p>
+            </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {filteredBookings.map((booking) => (

@@ -15,6 +15,13 @@ cp .env.example .env.local
 
 Dapatkan dari: https://app.supabase.com → Settings → API
 
+### Option B: Mock Mode (Tanpa Supabase) -> SUPER CEPAT ⚡
+Jika Anda **tidak** membuat file `.env.local`, aplikasi otomatis berjalan di **Mock Mode**:
+- **Bypass Login**: Masuk dengan email/password apapun.
+- **Admin Access**: Otomatis jadi admin.
+- **Data Dummy**: Ruangan dan booking sudah tersedia secara lokal.
+- **Cocok untuk**: Testing UI dan flow aplikasi tanpa setup backend.
+
 ### Step 2: Setup Database (via Supabase SQL Editor)
 
 **Paste dan jalankan:**

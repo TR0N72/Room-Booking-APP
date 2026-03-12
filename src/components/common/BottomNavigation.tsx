@@ -5,6 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { authService } from "@/services/auth";
 import { toast } from "sonner";
+import { LayoutDashboard, DoorOpen, CalendarDays, Settings, User, LogOut } from "lucide-react";
 
 export function BottomNavigation() {
   const pathname = usePathname();
@@ -37,35 +38,78 @@ export function BottomNavigation() {
 
   if (!user) return null;
 
-  const baseClasses = "transition-all duration-300 flex flex-col items-center justify-center sm:rounded-md rounded-t-lg";
-  const activeClasses = "text-blue-600 bg-blue-100 sm:bg-blue-50 scale-105 sm:scale-100";
-  const inactiveClasses = "text-gray-500 hover:text-gray-700 hover:bg-gray-100 sm:hover:bg-gray-100";
+  const NavItem = ({ href, icon: Icon, label, isActive, onClick }: any) => {
+    const content = (
+      <>
+        {isActive && (
+          <div className="absolute top-0 w-12 h-1 bg-hima-secondary rounded-b-full shadow-[0_4px_12px_rgba(59,130,246,0.5)]" />
+        )}
+        <div className={`p-1.5 rounded-xl transition-all duration-300 ${isActive ? "bg-blue-500/10 scale-110" : "bg-transparent group-hover:bg-slate-100"}`}>
+          <Icon size={22} strokeWidth={isActive ? 2.5 : 2} className="transition-transform duration-300" />
+        </div>
+
+        {/* Label - Only visible when active */}
+        <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isActive ? "max-w-[100px] opacity-100 mt-1" : "max-w-0 opacity-0 mt-0"}`}>
+          <span className="text-[10px] sm:text-xs font-bold whitespace-nowrap">
+            {label}
+          </span>
+        </div>
+      </>
+    );
+
+    const className = `flex-1 flex flex-col items-center justify-center py-3 px-1 transition-all duration-300 relative group leading-none ${isActive ? "text-hima-secondary grow-[1.5]" : "text-slate-400 hover:text-slate-600 grow"
+      }`;
+
+    if (href) {
+      return (
+        <Link href={href} className={className}>
+          {content}
+        </Link>
+      );
+    }
+
+    return (
+      <button onClick={onClick} className={className}>
+        {content}
+      </button>
+    );
+  };
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-linear-to-t sm:bg-white from-white to-gray-50 sm:to-white border-t-2 sm:border-t border-gray-300 sm:border-gray-200 z-50 shadow-2xl sm:shadow-lg rounded-t-3xl sm:rounded-none">
-      <div className="w-full h-11 sm:h-14 px-1 sm:px-4 py-1 sm:py-2">
-        <div className="flex justify-between items-center h-full gap-1 sm:gap-2">
-          <Link href="/dashboard" className={`${baseClasses} flex-1 sm:px-3 ${pathname === "/dashboard" ? activeClasses : inactiveClasses}`}>
-            <span className="text-[8px] sm:text-sm font-bold sm:font-medium leading-none">Dashboard</span>
-          </Link>
-          <Link href="/rooms" className={`${baseClasses} flex-1 sm:px-3 ${pathname.startsWith("/rooms") ? activeClasses : inactiveClasses}`}>
-            <span className="text-[8px] sm:text-sm font-bold sm:font-medium leading-none">Rooms</span>
-          </Link>
-          <Link href="/bookings" className={`${baseClasses} flex-1 sm:px-3 ${pathname.startsWith("/bookings") ? activeClasses : inactiveClasses}`}>
-            <span className="text-[8px] sm:text-sm font-bold sm:font-medium leading-none">Bookings</span>
-          </Link>
-          {isAdmin && (
-            <Link href="/admin" className={`${baseClasses} flex-1 sm:px-3 ${pathname.startsWith("/admin") ? activeClasses : inactiveClasses}`}>
-              <span className="text-[8px] sm:text-sm font-bold sm:font-medium leading-none">Admin</span>
-            </Link>
-          )}
-          <Link href="/profile" className={`${baseClasses} flex-1 sm:px-3 ${pathname === "/profile" ? activeClasses : inactiveClasses}`}>
-            <span className="text-[8px] sm:text-sm font-bold sm:font-medium leading-none">Profile</span>
-          </Link>
-          <button onClick={handleLogout} className={`${baseClasses} flex-1 sm:px-3 ${inactiveClasses}`}>
-            <span className="text-[8px] sm:text-sm font-bold sm:font-medium leading-none">Logout</span>
-          </button>
-        </div>
+    <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-xl border-t border-white/20 z-50 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] pb-safe">
+      <div className="flex justify-around items-center w-full max-w-lg mx-auto">
+        <NavItem
+          href="/dashboard"
+          icon={LayoutDashboard}
+          label="Home"
+          isActive={pathname === "/dashboard"}
+        />
+        <NavItem
+          href="/rooms"
+          icon={DoorOpen}
+          label="Rooms"
+          isActive={pathname.startsWith("/rooms")}
+        />
+        <NavItem
+          href="/bookings"
+          icon={CalendarDays}
+          label="Bookings"
+          isActive={pathname.startsWith("/bookings")}
+        />
+        {isAdmin && (
+          <NavItem
+            href="/admin"
+            icon={Settings}
+            label="Admin"
+            isActive={pathname.startsWith("/admin")}
+          />
+        )}
+        <NavItem
+          href="/profile"
+          icon={User}
+          label="Profile"
+          isActive={pathname === "/profile"}
+        />
       </div>
     </nav>
   );
